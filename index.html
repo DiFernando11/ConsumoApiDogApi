@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gatitos</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <!-- Title -->
+    <h1 class="titlePage">I Love the dogs</h1>
+    <main>
+      <!-- Upload Dogs -->
+      <section id="uploadMichi">
+        <h2>Upload pictures of your dogs</h2>
+
+        <form id="uploadingForm" method="post">
+          <div class="containerForm">
+            <div class="divUpload">
+              <div id="preview" class="styleImage">
+                <!-- Imagen precargada -->
+                <i class="bi bi-camera"></i>
+              </div>
+            </div>
+
+            <input class="selectPhoto" id="file" type="file" name="file" />
+
+            <button
+              class="btnUpload"
+              type="button"
+              onclick="uploadMichiPhoto()"
+            >
+              Subir Imagen
+            </button>
+          </div>
+        </form>
+        <!-- Seccion Favoritos -->
+        <section id="favoritesMichis">
+          <h2>Perros Favoritos</h2>
+          <article >
+            <img id="img1" alt="foto de gatitos" />
+            <button class="deleteFavorite">Eliminar de Favoritos</button>
+          </article>
+        </section>
+      </section>
+
+      <span id="error"></span>
+
+      <section id="randomMichis">
+        <h2>Perritos Aleatorios</h2>
+        <button class="btnReload" onclick="getData()">Reload</button>
+        <div id="containerCats">
+
+          <article class="sectionArticle">
+            <img id="img1"  alt="foto de gatitos" />
+            <button id="btn1" class="btnFavorites"> <span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img2" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn2" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img3" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn3" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img4" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn4" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img5" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn5" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img6" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn6" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img7" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn7" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img8" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn8" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img9" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn9" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+
+          <article class="sectionArticle">
+            <img id="img10" class="imgimgFavorites" alt="foto de gatitos" />
+            <button id="btn10" class="btnFavorites"><span>Guardar en favoritos</span></button>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./main.js"></script>
+  </body>
+</html>
