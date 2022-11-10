@@ -16,14 +16,19 @@
 
 #containerCats {
   margin: auto;
-  width: 90%;
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 2fr));
   gap: 10px;
 }
 #randomMichis img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  box-shadow: 0 0 7px 0px #000;
+  filter: saturate(150%);
+  display: block;
+  margin: auto;
 }
 
 .containerCats {
@@ -119,25 +124,39 @@ main {
   cursor: pointer;
   width: 180px;
   background-color: #6e91ff;
+  display: block;
+  margin: auto;
 }
 
-
 .btnFavorites span:hover::after {
-
   content: "💓";
 }
 
-.deleteFavorite{
+.deleteFavorite {
   display: block;
 }
 
-.articleDelete{
+.articleDelete {
   width: 10px;
-  border-radius:20px ;
+  border-radius: 20px;
+}
+.titleContainerDogs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
-@media (max-width: 650px){
+.imageMainTitle {
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 700px) {
   main {
     display: block;
+  }
+  #uploadMichi {
+    width: 100%;
   }
 }

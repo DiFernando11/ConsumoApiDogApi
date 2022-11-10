@@ -15,28 +15,24 @@ const URLUploadImages = `https://api.thedogapi.com/v1/images/upload`;
 const spanError = document.getElementById("error");
 // Cargar Imagen de Usuario
 
- document.getElementById("file").onchange = function(e){
-   let reader = new FileReader();
-   reader.readAsDataURL(e.target.files[0]);
-   reader.onload = function(){
-     let preview = document.getElementById("preview");
-     img = document.createElement("img");
-     img.src = reader.result;
-     img.style.width = "200px";
-     img.style.height = "200px";
-     img.style.margin = "auto";
-     preview.innerHTML= "";
-     preview.append(img);
-
-   }
- };
-
+document.getElementById("file").onchange = function (e) {
+  let reader = new FileReader();
+  reader.readAsDataURL(e.target.files[0]);
+  reader.onload = function () {
+    let preview = document.getElementById("preview");
+    img = document.createElement("img");
+    img.src = reader.result;
+    img.style.width = "200px";
+    img.style.height = "200px";
+    img.style.margin = "auto";
+    preview.innerHTML = "";
+    preview.append(img);
+  };
+};
 
 const getData = async () => {
   const response = await fetch(URLGET);
   const results = await response.json();
-  console.log("normal");
-  console.log(results);
 
   if (response.ok) {
     const img1 = document.getElementById("img1");
@@ -59,7 +55,7 @@ const getData = async () => {
     const btn9 = document.getElementById("btn9");
     const img10 = document.getElementById("img10");
     const btn10 = document.getElementById("btn10");
-
+    console.log(results);
     img1.src = results[0].url;
     img2.src = results[1].url;
     img3.src = results[2].url;
@@ -89,34 +85,51 @@ const getData = async () => {
 const favoritesData = async () => {
   const response = await fetch(URLFavourites);
   const results = await response.json();
-
-  console.log("favorite");
-  console.log(results);
-
   if (response.status !== 200) {
     spanError.innerHTML = "Hubo un error" + response.status + response.message;
   } else {
     const section = document.getElementById("favoritesMichis");
+    const containerFavoriteDogs = document.getElementById(
+      "containerFavoriteDogs"
+    );
     section.innerHTML = "";
+    containerFavoriteDogs.innerHTML = "";
     const h2 = document.createElement("h2");
-    const h2Text = document.createTextNode("Perros Favoritos Favoritos");
+    const h2Text = document.createTextNode("Perros Favoritos");
     h2.appendChild(h2Text);
     section.appendChild(h2);
+    section.appendChild(containerFavoriteDogs);
+    containerFavoriteDogs.style.display = "grid";
+    containerFavoriteDogs.style.margin = "auto";
+    containerFavoriteDogs.style.width = "100%";
+    containerFavoriteDogs.style.gridTemplateColumns =
+      "repeat(auto-fill, minmax(80px, 2fr))";
+    containerFavoriteDogs.style.gap = "10px";
 
     results.forEach((michi) => {
       const article = document.createElement("article");
       const img = document.createElement("img");
       const btn = document.createElement("button");
-      const btnText = document.createTextNode("Eliminar de Favoritos");
-      img.width = 150;
+      const btnText = document.createTextNode("Eliminar");
       img.src = michi.image.url;
+      img.style.width = "50px";
+      img.style.height = "50px";
+      img.style.borderRadius = "50%";
       btn.appendChild(btnText);
       btn.onclick = () => deleteFavourites(michi.id);
       article.appendChild(img);
       article.appendChild(btn);
-      article.style.width = "150px";
       article.style.margin = "10px auto";
-      section.appendChild(article);
+      section.appendChild(containerFavoriteDogs);
+      // section.appendChild(article);
+      containerFavoriteDogs.appendChild(article);
+      //  containerFavoriteDogs.style.display = "flex";
+      btn.style.display = "block";
+      btn.style.cursor = "pointer";
+      btn.style.borderRadius = "4px";
+      btn.style.fontSize = "10px";
+      btn.style.background = "#6e91ff";
+      
 
       // michi.image.url
     });
@@ -124,26 +137,11 @@ const favoritesData = async () => {
 };
 
 async function saveFavoritesMichis(id) {
-  const {result, status} = await api.post("/favourites", {
+  const { result, status } = await api.post("/favourites", {
     image_id: id,
   });
-
-  //******* llamado a la api sin AXIOS
-  // const response = await fetch(URLFavourites, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     image_id: id,
-  //   }),
-  // });
-  // const result = await response.json();
-  console.log("save");
-
   if (status !== 200) {
     spanError.innerHTML = "Hubo un error" + status + result.message;
-
   } else {
     console.log("Michi guardado en favoritos");
     favoritesData();
@@ -154,7 +152,6 @@ async function deleteFavourites(id) {
   const response = await fetch(URLFavouritesDelete(id), {
     method: "Delete",
   });
-
   const result = await response.json();
   if (response.status !== 200) {
     spanError.innerHTML = "Hubo un error" + response.status + result.message;
@@ -180,16 +177,9 @@ async function uploadMichiPhoto() {
   if (response.status !== 201) {
     spanError.innerHTML = "Hubo un error" + response.status + result.message;
   } else {
-    console.log("Michi subida exitosamente");
-    console.log({ result });
-    console.log(result.url);
     saveFavoritesMichis(result.id);
   }
 }
-
-
-
-
 
 favoritesData();
 getData();
